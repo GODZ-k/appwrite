@@ -7,8 +7,8 @@ import store from "./redux/Store.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Protected from "./components/AuthLayout.jsx";
-import Login from "./components/Login.jsx";
-import Signup from "./components/Signup.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
 import AllPosts from "./pages/AllPosts.jsx";
 import AddPost from "./pages/AddPost.jsx";
 import EditPosts from "./pages/EditPosts.jsx";
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:"/add-posts",
+        path:"/add-post",
         element:(
           <Protected authentication>
             <AddPost/>

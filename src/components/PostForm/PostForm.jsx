@@ -7,7 +7,8 @@ import { useSelector } from "react-redux";
 
 function PostForm({ post }) {
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.userData);
+  const userData = useSelector(state => state.auth);
+  // console.log(userData)
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
@@ -38,14 +39,17 @@ function PostForm({ post }) {
       }
     } else {
       const file = await appWriteService.uploadFile(data.image[0]);
+      // console.log(file)
 
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
+        console.log(data.featuredImage)
         const dbPost = await appWriteService.createPost({
           ...data,
-          userId: user.$id,
+          userId: userData.$id,
         });
+        // console.log(dbPost)
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
@@ -55,13 +59,13 @@ function PostForm({ post }) {
 
   const slugTransform = useCallback((value) => {
     if (value && typeof value === "string") {
-      const slug = value
+      return value
         .trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, "-")
+        .replace(/[^a-zA-Z\d\s]+/g, "-")
         .replace(/\s/g, "-");
-      return slug;
     }
+    return ""
   }, []);
 
   useEffect(() => {

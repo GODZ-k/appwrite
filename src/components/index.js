@@ -9,8 +9,8 @@ import Button from "./Button.jsx";
 import RTE from "./RTE.jsx";
 import Login from "./Login.jsx"
 import Signup from "./Signup.jsx";
-import PostForm from "./PostForm/PostForm.jsx"
-import PostCard from "./PostCard.jsx",
+import PostForm from "./PostForm/PostForm.jsx";
+import PostCard from "./PostCard.jsx";
 import Protected from "./AuthLayout.jsx";
 export {
     Header,
