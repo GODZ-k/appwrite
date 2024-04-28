@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 function PostForm({ post }) {
   const navigate = useNavigate();
-  const userData = useSelector(state => state.auth);
+  const userData = useSelector(state => state.auth.userData);
   // console.log(userData)
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
@@ -44,18 +44,21 @@ function PostForm({ post }) {
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
-        console.log(data.featuredImage)
+        // console.log(data.featuredImage)
+        // console.log(data , userData.$id)
         const dbPost = await appWriteService.createPost({
           ...data,
-          userId: userData.$id,
+          userId:userData.$id,
         });
-        // console.log(dbPost)
+        console.log(dbPost)
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
       }
     }
   };
+
+  console.log(appWriteService.previewFile(post.featuredImage))
 
   const slugTransform = useCallback((value) => {
     if (value && typeof value === "string") {
